@@ -26,6 +26,8 @@ public class CustReg {
         this.customer = customer;
         nextCustRegNo++;
     }
+    
+    
 
     public int getCustRegNo() {
         return custRegNo;
@@ -67,4 +69,6 @@ public class CustReg {
                 "CustRegDate: " + custRegDate + 
                 "Customer: " + customer;
     }
+    
+    
 }

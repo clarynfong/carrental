@@ -69,8 +69,7 @@ public abstract class Car implements Rentable{
     @Override
     public abstract double calculateRentalFee(int days);
 
-    @Override
-    public String toString() {
+    public String displayCarInfo() {
         return "Car" + 
                 "plateNo: " + plateNo + 
                 "Color: " + color + 
