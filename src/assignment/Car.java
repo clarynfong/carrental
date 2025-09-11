@@ -13,7 +13,7 @@ public class Car {
     private String brand, model, plate;
     private double rate;
     private boolean available;
-    private static int nextCarId = 101;
+    private static int nextCarId = 1;
 
     public Car(String brand, String model, String plate, double rate) {
         this.brand = brand;
@@ -54,7 +54,7 @@ public class Car {
 
     @Override
     public String toString() {
-        return "\nCar ID: " + carId + "Brand: " + brand + "Model: " + model + "Plate Number: " + plate + "Rate: " + rate + "per day"+ "Available: " + available;
+        return "\nCar ID: " + carId + " | Brand: " + brand + " | Model: " + model + " | Plate Number: " + plate + " | Rate: " + rate + "per day"+ " | Available: " + available;
     }
     
     

@@ -31,8 +31,6 @@ public class Rental {
         this.endDate = startDate.plusDays(day);
     }
 
-    
-
     @Override
     public String toString() {
         return customer.toString() + car.toString() + "Days: " + day + payment.toString();
@@ -65,10 +63,4 @@ public class Rental {
     public LocalDate getEndDate() {
         return endDate;
     }
-    
-    
-    
-    
-    
-    
 }

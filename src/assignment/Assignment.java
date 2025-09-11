@@ -223,6 +223,7 @@ public class Assignment {
         };
         
         p.setMethod(method);
+        p.pay();
         System.out.println("Payment completed");
         
     }
