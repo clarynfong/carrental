@@ -12,6 +12,8 @@ public class Customer {
     private String name;
     private String custId;
     private static int nextCustId = 1;
+    private String phone;
+    private String email;
 
     public Customer(String name) {
         this.custId = String.format("C%03d", nextCustId++);

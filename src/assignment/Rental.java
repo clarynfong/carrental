@@ -21,6 +21,9 @@ public class Rental {
     private LocalDate startDate;
     private LocalDate endDate;
 
+    public Rental() {
+    }
+    
     public Rental(Customer customer, Car car, int day, Payment payment) {
         this.rentalId = String.format("R%03d", nextRentalId++);
         this.customer = customer;
@@ -63,4 +66,10 @@ public class Rental {
     public LocalDate getEndDate() {
         return endDate;
     }
+
+    public void setPayment(Payment payment) {
+        this.payment = payment;
+    }
+    
+    
 }

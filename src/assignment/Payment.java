@@ -8,22 +8,18 @@ package assignment;
  *
  * @author yewzhang
  */
-public class Payment {
-    public enum PaymentMethod{CASH, EWALLET, CREDIT_CARD, DEBIT_CARD}
+public abstract class Payment {
     public enum Status{PENDING, COMPLETED, CANCELED}
     
-    private double amount;
-    private Status status;
-    private PaymentMethod method;
+    protected double amount;
+    protected Status status;
 
     public Payment(double amount) {
         this.amount = amount;
         this.status = Status.PENDING;
     }
     
-    public void pay() { 
-        this.status = Status.COMPLETED;
-    }
+    public abstract void pay();
     
     public void cancel(){
         this.status = Status.CANCELED;
@@ -34,14 +30,6 @@ public class Payment {
     }
     public Status getStatus() { 
         return status; 
-    }
-
-    public PaymentMethod getMethod() {
-        return method;
-    }
-
-    public void setMethod(PaymentMethod method) {
-        this.method = method;
     }
 
     @Override

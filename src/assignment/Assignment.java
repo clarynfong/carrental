@@ -15,12 +15,13 @@ import java.util.Scanner;
 public class Assignment {
 
     private static ArrayList<Customer> customers = new ArrayList<>();
-    private static ArrayList<Car> cars = new ArrayList<>();
+    
     private static ArrayList<Rental> rentals = new ArrayList<>();
     private static Scanner sc = new Scanner(System.in);
     
     public static void main(String[] args) {
-    
+        CarReg carReg = new CarReg();
+        
         while(true){
             int choice = mainMenu();
             sc.nextLine();
@@ -30,7 +31,7 @@ public class Assignment {
                     registerCustomer(); 
                     break;
                 case 2: 
-                    addCar(); 
+                    carReg.addCar();
                     break;
                 case 3: 
                     displayCar(); 
@@ -94,25 +95,11 @@ public class Assignment {
         System.out.print(c.toString());
     }
     
-    public static void addCar(){
-        System.out.print("Enter vehicle brand: ");
-        String brand = sc.nextLine();
-        System.out.print("Enter vehicle model: ");
-        String model = sc.nextLine();
-        System.out.print("Enter vehicle plate: ");
-        String plate = sc.nextLine();
-        System.out.print("Enter price per day: ");
-        double rate = sc.nextDouble();
-        sc.nextLine();
-        Car cc = new Car(brand, model, plate, rate);
-        cars.add(cc);
-        System.out.println("New car registered");
-        System.out.print(cc.toString());
-    }
+    
     
     public static void displayCar(){
         System.out.print("\n=== Avaiable Cars ===");
-        for(Car c: cars){
+        for(Car c: CarReg.getCars()){
             if(c.isAvailable()){
                 System.out.print(c.toString());
             }
@@ -143,10 +130,10 @@ public class Assignment {
         boolean validCarId = false;
         Car car = null;
         do{
-            System.out.print("Enter Car ID: ");
+            System.out.print("\nEnter Car ID: ");
             String carId = sc.nextLine();
 
-            for(Car c: cars){
+            for(Car c: CarReg.getCars()){
                 if(c.getCarId().equals(carId) && c.isAvailable()){
                     car = c;
                     validCarId = true;
@@ -168,7 +155,7 @@ public class Assignment {
         }
         
         double total = car.getRate() * days;
-        Payment payment = new Payment(total);
+        Payment payment = new Cash(total); 
         
         Rental rental = new Rental(customer, car, days, payment);
         rentals.add(rental);
@@ -198,6 +185,7 @@ public class Assignment {
         
         Payment p = rental.getPayment();
         int choice = 0;
+        
         if(p.getStatus() == Payment.Status.PENDING){
             System.out.println("Select Payment Method: ");
             System.out.println("1. Cash");
@@ -214,16 +202,17 @@ public class Assignment {
             sc.nextLine();
         }
         
-        Payment.PaymentMethod method = switch(choice){
-            case 1 -> Payment.PaymentMethod.CASH;
-            case 2 -> Payment.PaymentMethod.EWALLET;
-            case 3 -> Payment.PaymentMethod.CREDIT_CARD;
-            case 4 -> Payment.PaymentMethod.DEBIT_CARD;
-            default -> Payment.PaymentMethod.CASH;
+        Payment paymentM = switch(choice){
+            case 1 -> new Cash(p.getAmount());
+            case 2 -> new Ewallet(p.getAmount());
+            case 3 -> new CreditCard(p.getAmount());
+            case 4 -> new DebitCard(p.getAmount());
+            default -> new Cash(p.getAmount());
         };
         
-        p.setMethod(method);
-        p.pay();
+        rental.setPayment(paymentM); 
+        paymentM.pay();
+        rental.getCar().setAvailable(true);
         System.out.println("Payment completed");
         
     }
@@ -260,17 +249,22 @@ public class Assignment {
         return;
     }
 
+    
     System.out.println("\n--- Rental History ---");
+    System.out.printf("%-6s %-12s %-12s %-6s %-12s %-12s %-30s%n", "ID", "Customer", "Vehicle", "Days", "Start", "End", "Payment");
+
+    System.out.println("---------------------------------------------------------------------------------------------");
+
     for (Rental r : rentals) {
         Payment p = r.getPayment();
-        System.out.println(r.getRentalId() + " | Customer: " + r.getCustomer().getName() +
-                           " | Vehicle: " + r.getCar().getModel() +
-                           " | Days: " + r.getDay()+
-                           " | Start: " + r.getStartDate() +
-                           " | End: " + r.getEndDate() +
-                           " | Charge: " + p.getAmount() +
-                           " | Payment Status: " + p.getStatus() +
-                           (p.getMethod() != null ? " (" + p.getMethod() + ")" : ""));
+        System.out.printf("%-6s %-12s %-12s %-6d %-12s %-12s %-30s%n",
+                r.getRentalId(),
+                r.getCustomer().getName(),
+                r.getCar().getModel(),
+                r.getDay(),
+                r.getStartDate(),
+                r.getEndDate(),
+                p.toString()); 
         }
     }
     
