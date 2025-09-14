@@ -55,7 +55,7 @@ public class Cash extends Payment{
 
     @Override
     public String toString() {
-        return super.toString() + " | Method: " + (super.getStatus() == Payment.Status.COMPLETED ? "Cash": "N/A");
+        return super.toString() + (super.getStatus() == Payment.Status.COMPLETED ? String.format("%-15s", "Cash") : String.format("%-15s", "N/A"));
     }
     
     

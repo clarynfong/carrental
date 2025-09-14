@@ -34,6 +34,6 @@ public abstract class Payment {
 
     @Override
     public String toString() {
-        return "Amount: " + amount + ", Status: " + status;
+        return String.format("%-15.2f %-10s ", amount, status);
     }
 }

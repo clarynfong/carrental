@@ -31,6 +31,7 @@ public class CarReg {
         System.out.println("1. Sedan");
         System.out.println("2. SUV");
         System.out.println("3. MPV");
+        System.out.print("Enter your choice: ");
         do{
             try{
                 int type = sc.nextInt();

@@ -251,9 +251,9 @@ public class Assignment {
 
     
     System.out.println("\n--- Rental History ---");
-    System.out.printf("%-6s %-12s %-12s %-6s %-12s %-12s %-30s%n", "ID", "Customer", "Vehicle", "Days", "Start", "End", "Payment");
+    System.out.printf("%-6s %-12s %-12s %-6s %-12s %-12s %-15s %-10 %-15 %n", "ID", "Customer", "Vehicle", "Days", "Start", "End", "Payment Amount", "Status", "Method");
 
-    System.out.println("---------------------------------------------------------------------------------------------");
+    System.out.println("----------------------------------------------------------------------------------------------------");
 
     for (Rental r : rentals) {
         Payment p = r.getPayment();
