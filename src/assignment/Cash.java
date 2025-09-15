@@ -13,41 +13,29 @@ import java.util.Scanner;
 public class Cash extends Payment{
     Scanner sc = new Scanner(System.in);
     
+    
     public Cash(double amount) {
         super(amount);
     }
 
     @Override
     public void pay() {
-        int total = 50;   // bar length
-        int steps = 100;  // percent steps from 0..100
-
-        int prevLen = 0;
-        for (int progress = 0; progress <= steps; progress++) {
-            int filled = (progress * total) / steps;
-
-            StringBuilder bar = new StringBuilder(total);
-            for (int i = 0; i < filled; i++) bar.append("=");
-            for (int i = filled; i < total; i++) bar.append(" ");
-
-            String output = "[" + bar + "] " + progress + "%";
-
-            // Clear previous content (works even if \r isn't honored by the console)
-            StringBuilder clear = new StringBuilder();
-            for (int i = 0; i < prevLen; i++) clear.append(' ');
-
-            System.out.print("\r" + clear.toString() + "\r" + output);
-            System.out.flush();
-
-            prevLen = output.length();
-
-            try {
-                Thread.sleep(50); // simulated work
-            } catch (InterruptedException e) {
-                Thread.currentThread().interrupt();
-                break;
+        
+        System.out.print("Please enter payment amount: ");
+        double cash =  sc.nextDouble();
+        boolean paid = false;
+        do{
+            if (cash == amount){
+                System.out.println("Payment recieved.");
+                paid = true;
             }
-        }
+            else if(cash > amount){
+                double change = cash - amount;
+                System.out.println("Payment received. Changes amount: " + change);
+                paid = true;
+            }else
+                System.out.print("Insufficient amount paid.");
+        }while(!paid);
        
         this.status = Status.COMPLETED;
         

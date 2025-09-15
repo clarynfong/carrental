@@ -16,12 +16,24 @@ public class DebitCard extends Payment{
     public DebitCard(double amount) {
         super(amount);
     }
+    
 
     @Override
     public void pay() {
+        
+        System.out.println("Enter card number: ");
+        String cardNumber;
+        do {
+            cardNumber = sc.nextLine().trim();
+            if (!cardNumber.matches("\\d{16}"))
+                System.out.print("Invalid input! Please enter exactly 16 digits: ");
+        } while(!cardNumber.matches("\\d{16}"));
+
+        System.out.println("Credit Card accepted: **** **** **** " + cardNumber.substring(12));
+        
         System.out.println("Processing debit card payment...");
-       int total = 50;   // bar length
-        int steps = 100;  // percent steps from 0..100
+       int total = 50;   
+        int steps = 100;  
 
         int prevLen = 0;
         for (int progress = 0; progress <= steps; progress++) {
@@ -33,7 +45,6 @@ public class DebitCard extends Payment{
 
             String output = "[" + bar + "] " + progress + "%";
 
-            // Clear previous content (works even if \r isn't honored by the console)
             StringBuilder clear = new StringBuilder();
             for (int i = 0; i < prevLen; i++) clear.append(' ');
 
@@ -43,7 +54,7 @@ public class DebitCard extends Payment{
             prevLen = output.length();
 
             try {
-                Thread.sleep(50); // simulated work
+                Thread.sleep(50); 
             } catch (InterruptedException e) {
                 Thread.currentThread().interrupt();
                 break;

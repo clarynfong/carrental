@@ -20,8 +20,8 @@ public class Ewallet extends Payment{
     @Override
     public void pay() {
         System.out.println("Processing e-wallet payment...");
-        int total = 50;   // bar length
-        int steps = 100;  // percent steps from 0..100
+        int total = 50; 
+        int steps = 100;  
 
         int prevLen = 0;
         for (int progress = 0; progress <= steps; progress++) {
@@ -33,7 +33,6 @@ public class Ewallet extends Payment{
 
             String output = "[" + bar + "] " + progress + "%";
 
-            // Clear previous content (works even if \r isn't honored by the console)
             StringBuilder clear = new StringBuilder();
             for (int i = 0; i < prevLen; i++) clear.append(' ');
 
@@ -43,7 +42,7 @@ public class Ewallet extends Payment{
             prevLen = output.length();
 
             try {
-                Thread.sleep(50); // simulated work
+                Thread.sleep(50); 
             } catch (InterruptedException e) {
                 Thread.currentThread().interrupt();
                 break;

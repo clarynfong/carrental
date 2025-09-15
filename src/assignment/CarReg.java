@@ -5,6 +5,8 @@
 package assignment;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Scanner;
 
 /**
@@ -16,17 +18,44 @@ public class CarReg {
     Scanner sc = new Scanner(System.in);
     
     public void addCar(){
-        
+        boolean validInput = false;
         System.out.print("Enter vehicle brand: ");
-        String brand = sc.nextLine();
+        String brand;
+        do {
+            brand = sc.nextLine().trim().toUpperCase();
+
+            if (brand.isEmpty()) 
+                System.out.println("Name cannot be empty! Please re-enter.");
+        } while(brand.isEmpty());
+         
+        
         System.out.print("Enter vehicle model: ");
-        String model = sc.nextLine();
-        System.out.print("Enter price per day: ");
-        double rate = sc.nextDouble();
+        String model;
+        do {
+            model = sc.nextLine().trim().toUpperCase();
+
+            if (model.isEmpty()) 
+                System.out.println("Name cannot be empty! Please re-enter.");
+        } while(model.isEmpty());
+        
+        
+        double rate = 0;
+        do{
+            try{
+                System.out.print("Enter price per day: ");
+                rate = sc.nextDouble();
+                validInput = true;
+            }catch(Exception e){
+                System.out.println("Invalid input, please re-enter: ");
+                sc.nextLine();
+            }
+        }while(!validInput);
+
+        
         sc.nextLine();
         
         Car cc = null;
-        boolean validInput = false;
+        validInput = false;
         System.out.println("Select Car Type:");
         System.out.println("1. Sedan");
         System.out.println("2. SUV");
@@ -71,8 +100,68 @@ public class CarReg {
         }while(!validInput);
 
         cars.add(cc);
-        System.out.println("New car registered");
-        System.out.print(cc.toString());
+        System.out.print("New car registered");
+        System.out.println(cc.toString());
+    }
+    
+    public void displayCars(){
+    if (cars.isEmpty()) {
+        System.out.println("No record found.");
+        return;
+    }
+        System.out.print("\n=== Registered Cars ===");
+        for(Car c: cars){
+                System.out.print(c.toString());
+        }
+    }
+    
+    public static void displayAvailableCars(){
+        System.out.print("\n=== Avaiable Cars ===");
+        for(Car c: cars){
+            if(c.isAvailable()){
+                System.out.print(c.toString());
+            }
+        }
+    }
+    
+    public void sort(){
+        if (cars.isEmpty()) {
+            System.out.println("No customers yet.");
+            return;
+        }
+        System.out.println("\n--- Display Customers ---");
+        System.out.println("1. Sort by ID");
+        System.out.println("2. Sort by Daily Rate");
+        System.out.print("Enter choice (1-2): ");
+
+        int choice;
+        try {
+            choice = sc.nextInt();
+            sc.nextLine();
+        } catch (NumberFormatException e) {
+            System.out.println("Invalid input, returning to menu.");
+            sc.nextLine();
+            return;
+        }
+
+        switch (choice) {
+            case 1 -> {
+                Collections.sort(cars, Comparator.comparingInt(
+                        c -> Integer.valueOf(c.getCarId().substring(1))
+                ));
+                System.out.println("Cars sorted by ID.");
+            }
+            case 2 -> {
+                Collections.sort(cars, Comparator.comparing(Car::getRate));
+                
+                System.out.println("Customers sorted by DAILY RATE.");
+            }
+            default -> {
+                System.out.println("Invalid choice.");
+                return;
+            }
+        }
+        displayCars();
     }
 
     public static ArrayList<Car> getCars() {

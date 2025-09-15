@@ -19,6 +19,16 @@ public class CreditCard extends Payment{
 
     @Override
     public void pay() {
+        System.out.println("Enter card number: ");
+        String cardNumber;
+        do {
+            cardNumber = sc.nextLine().trim();
+            if (!cardNumber.matches("\\d{16}"))
+                System.out.print("Invalid input! Please enter exactly 16 digits: ");
+        } while(!cardNumber.matches("\\d{16}"));
+
+        System.out.println("Credit Card accepted: **** **** **** " + cardNumber.substring(12));
+        
         System.out.println("Processing credit card payment...");
         int total = 50;   // bar length
         int steps = 100;  // percent steps from 0..100
@@ -33,7 +43,7 @@ public class CreditCard extends Payment{
 
             String output = "[" + bar + "] " + progress + "%";
 
-            // Clear previous content (works even if \r isn't honored by the console)
+            // Clear previous content, so only 1 progress bar will be shown
             StringBuilder clear = new StringBuilder();
             for (int i = 0; i < prevLen; i++) clear.append(' ');
 
