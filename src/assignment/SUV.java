@@ -11,8 +11,8 @@ package assignment;
 public class SUV extends Car{
     private double power = 0;
     
-    public SUV(String brand, String model, double rate, double power) {
-        super(brand, model, rate);
+    public SUV(String brand, String model, String plate, double rate, double power) {
+        super(brand, model, plate, rate);
         this.power = power;
     }
 
@@ -26,7 +26,7 @@ public class SUV extends Car{
 
     @Override
     public String toString() {
-        return super.toString() + " | Type: SUV | Horsepower: " + power;
+        return super.toString() + String.format("%-7s %-25s", "SUV", "Horsepower: " + power + "hp");
     }
     
 }

@@ -60,6 +60,8 @@ public class DebitCard extends Payment{
                 break;
             }
         }
+        
+        this.status = Status.COMPLETED;
     }
 
     @Override

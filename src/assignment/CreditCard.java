@@ -59,6 +59,8 @@ public class CreditCard extends Payment{
                 break;
             }
         }
+        
+        this.status = Status.COMPLETED;
     }
 
     @Override

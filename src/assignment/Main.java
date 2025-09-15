@@ -10,12 +10,13 @@ import java.util.Scanner;
  *
  * @author yewzhang
  */
-public class Assignment {
+public class Main {
 
     private static Scanner sc = new Scanner(System.in);
     
     public static void main(String[] args) {  
         int choice;
+        CarReg.initializeCarData();
         do {
             System.out.println("\n--- Car Rental System ---");
             System.out.println("1. Customer Management");
@@ -137,7 +138,6 @@ public class Assignment {
     
     private static void rentalMenu(){
         Rental rental = new Rental();
-        Payment payment = null;
         boolean loop = true;
         int choice = 9;
         do{
@@ -158,7 +158,7 @@ public class Assignment {
                             loop = false;
                             break;
                         case 2:
-                            payment.processPayment();
+                            new Cash(0).processPayment(); // Payment is abstract class, unable to define a new object to call method, use new [any payment method] create a temporary dummy object
                             loop = false;
                             break;
                         case 3:

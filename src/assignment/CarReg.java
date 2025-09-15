@@ -17,28 +17,66 @@ public class CarReg {
     private static ArrayList<Car> cars = new ArrayList<>();
     Scanner sc = new Scanner(System.in);
     
+    public static void initializeCarData(){
+        Car iniCar = null;
+        iniCar = new Sedan("Proton", "Saga", "VHC9182", 100, 5);
+        cars.add(iniCar);
+        iniCar = new Sedan("Toyota", "Vios", "ABC1234", 120, 6);
+        cars.add(iniCar);
+        iniCar = new Sedan("Honda", "City", "XYZ567", 130, 6);
+        cars.add(iniCar);
+        
+        
+        iniCar = new SUV("Toyota", "Fortuner", "SUV1234", 250, 180);
+        cars.add(iniCar);
+        iniCar = new SUV("Honda", "CRV", "SUV5678", 220, 170);
+        cars.add(iniCar);
+        iniCar = new SUV("Mazda", "CX5", "SUV9012", 230, 175);
+        cars.add(iniCar);
+        
+        
+        iniCar = new MPV("Toyota", "Innova", "MPV123", 200, 7);
+        cars.add(iniCar);
+        iniCar = new MPV("Nissan", "Serena", "MPV456", 210, 8);
+        cars.add(iniCar);
+        iniCar = new MPV("Perodua", "Alza", "MPV789", 180, 7);
+        cars.add(iniCar);
+
+    }
+    
+    //--------------------------------------------------------------------------
     public void addCar(){
         boolean validInput = false;
-        System.out.print("Enter vehicle brand: ");
+        
+    // Enter car detail ----------------------------
+        System.out.print("Enter car brand: ");
         String brand;
         do {
-            brand = sc.nextLine().trim().toUpperCase();
+            brand = sc.nextLine().trim();
 
             if (brand.isEmpty()) 
-                System.out.println("Name cannot be empty! Please re-enter.");
+                System.out.print("Name cannot be empty! Please re-enter: ");
         } while(brand.isEmpty());
          
         
-        System.out.print("Enter vehicle model: ");
+        System.out.print("Enter car model: ");
         String model;
         do {
-            model = sc.nextLine().trim().toUpperCase();
+            model = sc.nextLine().trim();
 
             if (model.isEmpty()) 
-                System.out.println("Name cannot be empty! Please re-enter.");
+                System.out.print("Name cannot be empty! Please re-enter: ");
         } while(model.isEmpty());
         
-        
+        System.out.print("Enter car plate no.: ");
+        String plate;
+        do {
+            plate = sc.nextLine().trim().toUpperCase();
+            if (!plate.matches("^[A-Z]{3}\\d{1,4}$")) {
+                System.out.print("Invalid plate number! Please re-enter(e.g. ABC1234): ");
+            }
+        } while (!plate.matches("^[A-Z]{3}\\d{1,4}$"));
+
         double rate = 0;
         do{
             try{
@@ -46,14 +84,14 @@ public class CarReg {
                 rate = sc.nextDouble();
                 validInput = true;
             }catch(Exception e){
-                System.out.println("Invalid input, please re-enter: ");
+                System.out.print("Invalid input, please re-enter: ");
                 sc.nextLine();
             }
         }while(!validInput);
 
-        
         sc.nextLine();
         
+    // Select car's type ---------------------------------------
         Car cc = null;
         validInput = false;
         System.out.println("Select Car Type:");
@@ -71,21 +109,21 @@ public class CarReg {
                         System.out.print("Enter fuel effiency (L/100km): ");
                         double fuelEfficiency = sc.nextDouble();
                         sc.nextLine();
-                        cc = new Sedan(brand, model, rate, fuelEfficiency);
+                        cc = new Sedan(brand, model, plate, rate, fuelEfficiency);
                         validInput = true;
                         break;
                     case 2:
                         System.out.print("Enter horsepower (hp): ");
                         double horsepower = sc.nextDouble();
                         sc.nextLine();
-                        cc = new SUV(brand, model, rate, horsepower);
+                        cc = new SUV(brand, model, plate, rate, horsepower);
                         validInput = true;
                         break;
                     case 3:
                         System.out.print("Enter number of seats: ");
                         int seats = sc.nextInt();
                         sc.nextLine();
-                        cc = new MPV(brand, model, rate, seats);
+                        cc = new MPV(brand, model, plate, rate, seats);
                         validInput = true;
                         break;
                     default:
@@ -93,30 +131,37 @@ public class CarReg {
                 }
 
             }catch(Exception e){
-                System.out.println("Invalid input, please re-enter: ");
+                System.out.print("Invalid input, please re-enter: ");
                 sc.nextLine();
             }
             
         }while(!validInput);
-
+// add into array
         cars.add(cc);
         System.out.print("New car registered");
         System.out.println(cc.toString());
     }
     
+    
+    //-Display all the cars
     public void displayCars(){
     if (cars.isEmpty()) {
         System.out.println("No record found.");
         return;
     }
         System.out.print("\n=== Registered Cars ===");
+        System.out.println("\n--------------------------------------------------------------------------------------------------------------------");
+        System.out.printf("%-6s %-15s %-15s %-10s %-11s %-13s %-7s %-25s %n","Car ID", "Brand", "Model", "Plate No.", "Rate(/day)", "Availablity", "Type", "Key Feature");
         for(Car c: cars){
                 System.out.print(c.toString());
         }
     }
     
+    //Display only available car
     public static void displayAvailableCars(){
-        System.out.print("\n=== Avaiable Cars ===");
+        System.out.println("\n=== Avaiable Cars ===");
+        System.out.println("\n--------------------------------------------------------------------------------------------------------------------");
+        System.out.printf("%-6s %-15s %-15s %-10s %-11s %-13s %-7s %-25s %n","Car ID", "Brand", "Model", "Plate No.", "Rate(/day)", "Availablity", "Type", "Key Feature");
         for(Car c: cars){
             if(c.isAvailable()){
                 System.out.print(c.toString());
@@ -126,7 +171,7 @@ public class CarReg {
     
     public void sort(){
         if (cars.isEmpty()) {
-            System.out.println("No customers yet.");
+            System.out.println("No cars yet.");
             return;
         }
         System.out.println("\n--- Display Customers ---");

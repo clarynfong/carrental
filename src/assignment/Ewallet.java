@@ -48,6 +48,8 @@ public class Ewallet extends Payment{
                 break;
             }
         }
+        
+        this.status = Status.COMPLETED;
     }
 
     @Override

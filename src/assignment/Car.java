@@ -10,14 +10,15 @@ package assignment;
  */
 public class Car {
     private String carId;
-    private String brand, model;
+    private String brand, model, plate;
     private double rate;
     private boolean available;
     private static int nextCarId = 1;
 
-    public Car(String brand, String model, double rate) {
+    public Car(String brand, String model, String plate, double rate) {
         this.brand = brand;
         this.model = model;
+        this.plate = plate;
         this.rate = rate;
         this.carId = String.format("V%03d", nextCarId++);
         this.available = true;
@@ -35,6 +36,10 @@ public class Car {
         return model;
     }
 
+    public String getPlate() {
+        return plate;
+    }
+
     public double getRate() {
         return rate;
     }
@@ -49,7 +54,7 @@ public class Car {
 
     @Override
     public String toString() {
-        return "\nCar ID: " + carId + " | Brand: " + brand + " | Model: " + model + " | Rate: " + rate + " per day"+ " | Available: " + available;
+        return String.format("\n%-6s %-15s %-15s %-10s %-13s", carId, brand, model, plate, rate) + (available == true ? String.format("%-13s ", "Available"):String.format("%-13s ", "Unavaiable"));
     }
     
     

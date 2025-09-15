@@ -21,6 +21,7 @@ public class Cash extends Payment{
     @Override
     public void pay() {
         
+        System.out.println("Amount to be paid: " + amount);
         System.out.print("Please enter payment amount: ");
         double cash =  sc.nextDouble();
         boolean paid = false;
@@ -33,8 +34,10 @@ public class Cash extends Payment{
                 double change = cash - amount;
                 System.out.println("Payment received. Changes amount: " + change);
                 paid = true;
-            }else
+            }else{
                 System.out.print("Insufficient amount paid.");
+                sc.nextDouble();
+            }
         }while(!paid);
        
         this.status = Status.COMPLETED;

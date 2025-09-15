@@ -11,8 +11,8 @@ package assignment;
 public class MPV extends Car{
     private int seats = 0;
     
-    public MPV(String brand, String model, double rate, int seats) {
-        super(brand, model, rate);
+    public MPV(String brand, String model, String plate, double rate, int seats) {
+        super(brand, model, plate, rate);
         this.seats = seats;
     }
 
@@ -26,6 +26,6 @@ public class MPV extends Car{
 
     @Override
     public String toString() {
-        return super.toString() + " | Type: MPV | Seats: " + seats;
+        return super.toString() + String.format("%-7s %-25s", "MPV", "Seats: " + seats + "seats");
     }
 }

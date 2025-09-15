@@ -30,6 +30,10 @@ public abstract class Payment {
     
     
     public void processPayment(){
+        if (Rental.getRentals().isEmpty()) {
+            System.out.println("No rental available yet.");
+            return;
+        }
         boolean validRentId = false;
         Rental rental = null;
         do{

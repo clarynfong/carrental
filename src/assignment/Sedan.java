@@ -11,8 +11,8 @@ package assignment;
 public class Sedan extends Car{
     private double fuelEfficiency;
 
-    public Sedan(String brand, String model, double rate, double fuelEfficiency) {
-        super(brand, model, rate);
+    public Sedan(String brand, String model, String plate, double rate, double fuelEfficiency) {
+        super(brand, model, plate, rate);
         this.fuelEfficiency = fuelEfficiency;
     }
 
@@ -26,7 +26,7 @@ public class Sedan extends Car{
 
     @Override
     public String toString() {
-        return super.toString() + " | Type: Sedan | Fuel efficiency: " + fuelEfficiency + " L/100km";
+        return super.toString() + String.format("%-7s %-25s", "Sedan", "Fuel efficiency: " + fuelEfficiency + "L/100km");
     }
     
 }
