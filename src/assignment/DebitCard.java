@@ -66,6 +66,6 @@ public class DebitCard extends Payment{
 
     @Override
     public String toString() {
-        return super.toString() + " | Method: " +  (super.getStatus() == Payment.Status.COMPLETED ? "Debit Card": "N/A");
+        return super.toString() +  (super.getStatus() == Payment.Status.COMPLETED ? "Debit Card": "N/A");
     }
 }

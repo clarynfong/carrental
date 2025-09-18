@@ -27,7 +27,7 @@ public class CustReg implements Sortable{
             if (name.isEmpty()) {
                 System.out.println("Name cannot be empty! Please re-enter.");
             } else if (!name.matches("[A-Z ]+")) { 
-                System.out.println("Error! Only letters and spaces are allowed.");
+                System.out.println("Error! Only letters and spaces are allowed. Please enter again: ");
                 name = ""; // reset to empty to loop again
             }
         } while (name.isEmpty());
@@ -48,7 +48,7 @@ public class CustReg implements Sortable{
             email = sc.nextLine().toLowerCase();
 
             if (!email.matches("^[\\w._%+-]+@[\\w.-]+\\.[A-Za-z]{2,6}$")) {
-                System.out.print("Invalid email format! Please re-enter.");
+                System.out.print("Invalid email format! Please re-enter: ");
             } else {
                 break;
             }
@@ -103,7 +103,7 @@ public class CustReg implements Sortable{
             case 2 -> {
                 Collections.sort(customers, Comparator.comparing(Customer::getName));
                 
-                System.out.println("Customers sorted by ID.");
+                System.out.println("Customers sorted by Name.");
             }
             default -> {
                 System.out.println("Invalid choice.");

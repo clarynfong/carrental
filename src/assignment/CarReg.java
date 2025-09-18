@@ -158,7 +158,7 @@ public class CarReg {
     }
     
     //Display only available car
-    public static void displayAvailableCars(){
+    public void displayAvailableCars(){
         System.out.println("\n=== Avaiable Cars ===");
         System.out.println("\n--------------------------------------------------------------------------------------------------------------------");
         System.out.printf("%-6s %-15s %-15s %-10s %-11s %-13s %-7s %-25s %n","Car ID", "Brand", "Model", "Plate No.", "Rate(/day)", "Availablity", "Type", "Key Feature");
@@ -174,7 +174,7 @@ public class CarReg {
             System.out.println("No cars yet.");
             return;
         }
-        System.out.println("\n--- Display Customers ---");
+        System.out.println("\n--- Display Cars ---");
         System.out.println("1. Sort by ID");
         System.out.println("2. Sort by Daily Rate");
         System.out.print("Enter choice (1-2): ");

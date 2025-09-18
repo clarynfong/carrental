@@ -23,8 +23,19 @@ public class Cash extends Payment{
         
         System.out.println("Amount to be paid: " + amount);
         System.out.print("Please enter payment amount: ");
-        double cash =  sc.nextDouble();
+        double cash = 0;
+        boolean validInput = false;
+        do{
+            try{
+                cash = sc.nextDouble();
+                validInput = true;
+            }catch(Exception e){
+                System.out.print("Invalid input, please re-enter: ");
+                sc.nextLine();
+            }
+        }while(!validInput);
         boolean paid = false;
+        validInput = false;
         do{
             if (cash == amount){
                 System.out.println("Payment recieved.");
@@ -36,7 +47,15 @@ public class Cash extends Payment{
                 paid = true;
             }else{
                 System.out.print("Insufficient amount paid.");
-                sc.nextDouble();
+                do{
+                    try{
+                        cash = sc.nextDouble();
+                        validInput = true;
+                    }catch(Exception e){
+                        System.out.print("Invalid input, please re-enter: ");
+                        sc.nextLine();
+                    }
+                }while(!validInput);
             }
         }while(!paid);
        

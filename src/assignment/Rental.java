@@ -64,7 +64,7 @@ public class Rental {
             }
         }while(!validCustId);
         
-        carReg.displayCars();
+        carReg.displayAvailableCars();
         
         boolean validCarId = false;
         Car car = null;
@@ -86,12 +86,17 @@ public class Rental {
         
         System.out.print("Enter number of days: ");
         int days = 1;
-        try{
-            days = sc.nextInt();
-        }catch(Exception e){
-            System.out.println("Invalid input, please re-enter: ");
-            sc.nextLine();
-        }
+        boolean validday = false;
+        do{
+            try{
+                days = sc.nextInt();
+                validday = true;
+            }catch(Exception e){
+                System.out.println("Invalid input, please re-enter: ");
+                sc.nextLine();
+            }
+        
+        }while(!validday);
         
         double total = car.getRate() * days;
         Payment payment = new Cash(total); //

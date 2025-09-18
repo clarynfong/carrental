@@ -54,7 +54,7 @@ public class Ewallet extends Payment{
 
     @Override
     public String toString() {
-        return super.toString() + " | Method: " +  (super.getStatus() == Payment.Status.COMPLETED ? "E-Wallet" : "N/A");
+        return super.toString() + (super.getStatus() == Payment.Status.COMPLETED ? "E-Wallet" : "N/A");
     }
     
 }

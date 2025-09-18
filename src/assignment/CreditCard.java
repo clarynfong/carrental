@@ -65,7 +65,7 @@ public class CreditCard extends Payment{
 
     @Override
     public String toString() {
-        return super.toString() + " | Method: " +  (super.getStatus() == Payment.Status.COMPLETED ? "Credit Card": "N/A");
+        return super.toString() + (super.getStatus() == Payment.Status.COMPLETED ? "Credit Card": "N/A");
     }
     
 }
